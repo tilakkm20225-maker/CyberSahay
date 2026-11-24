@@ -1,0 +1,1 @@
+"""CyberSahay FastAPI application."""
