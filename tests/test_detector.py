@@ -78,3 +78,39 @@ def test_sensitive_keyword_alone_is_not_proof_of_fraud():
     )
     assert result["risk_score"] == 18
     assert result["category"] == "Lower risk"
+
+
+
+@pytest.mark.parametrize(
+    "message",
+    [
+        # Kannada: account-blocking threat and OTP disclosure
+        "ನಿಮ್ಮ ಬ್ಯಾಂಕ್ ಖಾತೆಯನ್ನು ಇಂದು ಬ್ಲಾಕ್ ಮಾಡಲಾಗುತ್ತದೆ. "
+        "ತಕ್ಷಣ ನಿಮ್ಮ KYC ಪರಿಶೀಲಿಸಲು ಈ ಲಿಂಕ್ ಕ್ಲಿಕ್ ಮಾಡಿ. "
+        "ನಿಮ್ಮ OTP ಅನ್ನು ಹಂಚಿಕೊಳ್ಳಿ.",
+
+        # Hindi: account closure threat and OTP disclosure
+        "आपका बैंक खाता आज बंद कर दिया जाएगा। "
+        "तुरंत अपना KYC सत्यापित करें और अपना OTP साझा करें।",
+    ],
+)
+def test_kannada_and_hindi_scam_messages_trigger_warnings(message):
+    result = analyze_text(message)
+
+    assert result["risk_score"] >= 30
+    assert result["category"] in ("Needs caution", "High risk")
+    assert len(result["explanation"]) > 0
+
+
+@pytest.mark.parametrize(
+    "message",
+    [
+        "ನಾಳೆ ಬೆಳಿಗ್ಗೆ ಭೇಟಿಯಾಗೋಣ. ನಿಮ್ಮನ್ನು ನೋಡಲು ಸಂತೋಷವಾಗುತ್ತದೆ.",
+        "कल सुबह मिलते हैं। आपसे मिलकर खुशी होगी।",
+    ],
+)
+def test_legitimate_kannada_and_hindi_messages_are_not_high_risk(message):
+    result = analyze_text(message)
+
+    assert result["risk_score"] < 65
+    assert result["category"] != "High risk"

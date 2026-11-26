@@ -45,55 +45,158 @@ def contains_unsupported_script(text: str) -> bool:
     return False
 
 
+
+def is_otp_safety_warning(text: str) -> bool:
+    """Detect common messages warning users not to disclose OTPs."""
+    t = re.sub(r"\s+", " ", text.lower())
+
+    patterns = [
+        # English safety warnings
+        r"\bnever\s+(?:share|send|tell|reveal|provide|disclose)\b.{0,100}\b(otp|one[- ]time password)\b",
+        r"\b(?:do not|don't|dont|should not|shouldn't|must not|mustn't)\s+(?:share|send|tell|reveal|provide|disclose)\b.{0,100}\b(otp|one[- ]time password)\b",
+        r"\b(otp|one[- ]time password)\b.{0,60}\b(?:should never be shared|must not be shared|should not be shared)\b",
+        r"\b(?:bank|we)\s+(?:will never|never)\s+ask\b.{0,100}\b(otp|one[- ]time password)\b",
+
+        # Kannada safety warnings
+        r"(?:ಒಟಿಪಿ|ಒನ್ ಟೈಮ್ ಪಾಸ್ವರ್ಡ್).{0,60}(?:ಹಂಚಿಕೊಳ್ಳಬೇಡಿ|ಹೇಳಬೇಡಿ|ಕಳುಹಿಸಬೇಡಿ)",
+
+        # Hindi safety warnings
+        r"(?:ओटीपी|वन[- ]टाइम पासवर्ड|otp).{0,60}(?:साझा न करें|मत बताएं|न बताएं|न भेजें)",
+    ]
+
+    return any(re.search(pattern, t) for pattern in patterns)
+
+
+
 def get_rule_signals(text: str):
     signals = []
-    t = text.lower()
+    t = re.sub(r"\s+", " ", text.lower())
+
+    safety_warning = is_otp_safety_warning(t)
 
     rules = [
-    (
-    r"\b(otp|one[- ]time password)\b.{0,100}"
-    r"(?<!do not )(?<!don't )(?<!never )"
-    r"\b(share|send|tell|reveal|provide|forward|disclose)\b"
-    r"|\b(?<!do not )(?<!don't )(?<!never )"
-    r"(share|send|tell|reveal|provide|forward|disclose)\b"
-    r".{0,100}\b(otp|one[- ]time password)\b",
-    "Requests disclosure of an OTP or one-time password",
-    ),
-    (
-        r"\b(otp|one[- ]time password)\b",
-        "Mentions an OTP or one-time password",
-    ),
-    (
-        r"\b(urgent|immediately|act now|within 24 hours|final warning)\b",
-        "Uses urgency or pressure",
-    ),
-    (
-        r"\b(verify|update)\b.{0,60}\b(kyc|account|bank|details)\b",
-        "Requests account or KYC verification",
-    ),
-    (
-        r"(?=.*\b(?:account|bank account)\b.{0,50}\b(?:block|blocked|suspend|suspended|close|closed|restrict|restricted)\b)(?=.*\b(?:verify|update|confirm)\b.{0,60}\b(?:kyc|account|bank|details)\b)",
-        "Combines an account restriction threat with a request to update sensitive details",
-    ),
-    (
-        r"\b(you(?:'ve| have)?\s+won|winner|prize|free gift|claim(?:\s+your)?\s+reward|(?:claim|redeem|collect)\s+(?:your\s+)?cashback)\b",
-        "Promises a prize or reward",
-    ),
-    (
-        r"\b(processing fee|joining fee|pay.{0,15}fee)\b",
-        "Requests an upfront fee",
-    ),
-    (
-        r"https?://|www\.",
-        "Contains a web link",
-    ),
-]
+        # English OTP disclosure
+        (
+            r"\b(otp|one[- ]time password)\b.{0,100}"
+            r"\b(share|send|tell|reveal|provide|forward|disclose)\b"
+            r"|\b(share|send|tell|reveal|provide|forward|disclose)\b"
+            r".{0,100}\b(otp|one[- ]time password)\b",
+            "Requests disclosure of an OTP or one-time password",
+            "otp",
+        ),
 
-    for pattern, reason in rules:
+        # OTP mentions
+        (
+            r"\b(otp|one[- ]time password)\b|"
+            r"ಒಟಿಪಿ|ಒನ್ ಟೈಮ್ ಪಾಸ್ವರ್ಡ್|"
+            r"ओटीपी|वन[- ]टाइम पासवर्ड",
+            "Mentions an OTP or one-time password",
+            "otp",
+        ),
+
+        # Kannada OTP disclosure
+        (
+            r"(?:otp|ಒಟಿಪಿ|ಒನ್ ಟೈಮ್ ಪಾಸ್ವರ್ಡ್).{0,60}"
+            r"(?:ಹಂಚಿಕೊಳ್ಳಿ|ಕಳುಹಿಸಿ|ಹೇಳಿ)|"
+            r"(?:ಹಂಚಿಕೊಳ್ಳಿ|ಕಳುಹಿಸಿ|ಹೇಳಿ).{0,60}"
+            r"(?:otp|ಒಟಿಪಿ)",
+            "Requests disclosure of an OTP or one-time password",
+            "otp",
+        ),
+
+        # Hindi OTP disclosure
+        (
+            r"(?:otp|ओटीपी|वन[- ]टाइम पासवर्ड).{0,60}"
+            r"(?:साझा करें|बताएं|भेजें)|"
+            r"(?:साझा करें|बताएं|भेजें).{0,60}"
+            r"(?:otp|ओटीपी)",
+            "Requests disclosure of an OTP or one-time password",
+            "otp",
+        ),
+
+        # English urgency
+        (
+            r"\b(urgent|immediately|act now|within 24 hours|final warning)\b",
+            "Uses urgency or pressure",
+            "general",
+        ),
+
+        # Kannada and Hindi urgency
+        (
+            r"ತಕ್ಷಣ|ಕೂಡಲೇ|ಇಂದೇ|ತುರ್ತು|"
+            r"तुरंत|शीघ्र|अभी|आज ही|तत्काल",
+            "Uses urgency or pressure",
+            "general",
+        ),
+
+        # English account and KYC verification
+        (
+            r"\b(verify|update)\b.{0,60}\b(kyc|account|bank|details)\b",
+            "Requests account or KYC verification",
+            "general",
+        ),
+
+        # Kannada and Hindi KYC verification
+        (
+            r"(?:kyc|ಕೆವೈಸಿ).{0,60}(?:ಪರಿಶೀಲ|ನವೀಕರ|ದೃಢೀಕರ)|"
+            r"(?:पुष्टि|सत्यापित|अपडेट).{0,60}(?:kyc|खाता|बैंक)",
+            "Requests account or KYC verification",
+            "general",
+        ),
+
+        # English account restriction threats
+        (
+            r"\b(account|bank account)\b.{0,50}"
+            r"\b(block|blocked|suspend|suspended|close|closed|restrict|restricted)\b",
+            "Threatens account restriction or closure",
+            "general",
+        ),
+
+        # Kannada and Hindi account restriction threats
+        (
+            r"(?:ಖಾತೆ|ಬ್ಯಾಂಕ್ ಖಾತೆ).{0,60}"
+            r"(?:ಬ್ಲಾಕ್|ನಿರ್ಬಂಧ|ಮುಚ್ಚ|ಸ್ಥಗಿತ)|"
+            r"(?:खाता|बैंक खाता).{0,60}"
+            r"(?:बंद|ब्लॉक|निलंबित|रोक)",
+            "Threatens account restriction or closure",
+            "general",
+        ),
+
+        # Prize and reward
+        (
+            r"\b(you(?:'ve| have)?\s+won|winner|prize|free gift|"
+            r"claim(?:\s+your)?\s+reward|"
+            r"(?:claim|redeem|collect)\s+(?:your\s+)?cashback)\b",
+            "Promises a prize or reward",
+            "general",
+        ),
+
+        # Upfront fees
+        (
+            r"\b(processing fee|joining fee|pay.{0,15}fee)\b",
+            "Requests an upfront fee",
+            "general",
+        ),
+
+        # Web links
+        (
+            r"https?://|www\.",
+            "Contains a web link",
+            "general",
+        ),
+    ]
+
+    for pattern, reason, rule_type in rules:
+        if safety_warning and rule_type == "otp":
+            continue
+
         if re.search(pattern, t):
-            signals.append(reason)
+            if reason not in signals:
+                signals.append(reason)
 
     return signals
+
+
 
 
 def classify_with_bsis(text: str, input_mode: str):
