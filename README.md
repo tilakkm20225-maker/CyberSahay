@@ -39,7 +39,9 @@ The platform provides an interface in **English, Kannada, and Hindi**, making cy
 
 ## 📸 Project Screenshot
 
-![CyberSahay Screenshot 1](docs/images/image.png)
+<p align="center">
+  <img src="docs/images/image.png" alt="CyberSahay Overview" width="65%">
+</p>
 
 ---
 
@@ -402,7 +404,9 @@ Never share OTPs, passwords, UPI PINs, or banking credentials. Verify unexpected
 Do not open suspicious URLs simply to test them.
 
 
-![CyberSahay Screenshot 2](docs/images/image%20%282%29.jpeg)
+<p align="center">
+  <img src="docs/images/image%20(2).jpeg" alt="CyberSahay Screenshot" width="65%">
+</p>
 
 ---
 
