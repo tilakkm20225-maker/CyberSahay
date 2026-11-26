@@ -8,11 +8,9 @@
 
 **Understand suspicious messages. Identify fraud signals. Stay safer online.**
 
-## 📸 Project Screenshots
 
-![CyberSahay Screenshot 1](docs/images/image.png)
 
-![CyberSahay Screenshot 2](docs/images/image%20%282%29.jpeg)
+
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688)
@@ -39,6 +37,10 @@ The platform provides an interface in **English, Kannada, and Hindi**, making cy
 
 > **Our goal:** Make cybersecurity awareness easier to understand and accessible to more people.
 
+## 📸 Project Screenshot
+
+![CyberSahay Screenshot 1](docs/images/image.png)
+
 ---
 
 ## 🚀 What Can CyberSahay Do?
@@ -53,6 +55,7 @@ The platform provides an interface in **English, Kannada, and Hindi**, making cy
 | 🔍 Explainable Results | Show the warning signals identified during analysis. |
 | 🌍 Multilingual Interface | Use the application in English, Kannada, or Hindi. |
 | 📊 Analysis History | View recent analysis results through the dashboard. |
+
 
 ---
 
@@ -397,6 +400,9 @@ A lower-risk result does not guarantee that a message or URL is safe. A high-ris
 Never share OTPs, passwords, UPI PINs, or banking credentials. Verify unexpected requests through official applications, websites, or phone numbers.
 
 Do not open suspicious URLs simply to test them.
+
+
+![CyberSahay Screenshot 2](docs/images/image%20%282%29.jpeg)
 
 ---
 
