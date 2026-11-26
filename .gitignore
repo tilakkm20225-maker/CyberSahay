@@ -28,8 +28,25 @@ datasets/raw/*
 datasets/processed/*
 !datasets/processed/.gitkeep
 
+# Intermediate datasets
+datasets/interim/*
+!datasets/interim/.gitkeep
+
 # Editor and operating system
 .vscode/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Backup files
+*.bak
+*_backup.*
+*_backup/
+
+# TypeScript build files
+*.tsbuildinfo
+
+# Duplicate configuration files
+* - Copy.gitignore
+
+ml/experiments/*.joblib

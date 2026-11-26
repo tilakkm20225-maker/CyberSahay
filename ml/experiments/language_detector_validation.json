@@ -1,0 +1,269 @@
+{
+  "experiment": "experimental_character_ngram_language_detector",
+  "training_samples": 17749,
+  "validation_samples": 1073,
+  "language_count": 23,
+  "overall_accuracy": 0.8275862068965517,
+  "script_mode_results": {
+    "native_script": {
+      "samples": 586,
+      "accuracy": 0.9368600682593856,
+      "report": {
+        "as-IN": {
+          "precision": 0.8928571428571429,
+          "recall": 0.9615384615384616,
+          "f1-score": 0.9259259259259259,
+          "support": 26.0
+        },
+        "bn-IN": {
+          "precision": 0.9777777777777777,
+          "recall": 1.0,
+          "f1-score": 0.9887640449438202,
+          "support": 44.0
+        },
+        "brx-IN": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 20.0
+        },
+        "doi-IN": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 17.0
+        },
+        "en-IN": {
+          "precision": 0.9833333333333333,
+          "recall": 0.7564102564102564,
+          "f1-score": 0.855072463768116,
+          "support": 78.0
+        },
+        "gu-IN": {
+          "precision": 1.0,
+          "recall": 0.95,
+          "f1-score": 0.9743589743589743,
+          "support": 20.0
+        },
+        "hi-IN": {
+          "precision": 0.7714285714285715,
+          "recall": 0.9310344827586207,
+          "f1-score": 0.84375,
+          "support": 58.0
+        },
+        "kn-IN": {
+          "precision": 1.0,
+          "recall": 0.9473684210526315,
+          "f1-score": 0.972972972972973,
+          "support": 19.0
+        },
+        "kok-IN": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 17.0
+        },
+        "ks-IN": {
+          "precision": 1.0,
+          "recall": 0.9285714285714286,
+          "f1-score": 0.9629629629629629,
+          "support": 14.0
+        },
+        "mai-IN": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 18.0
+        },
+        "ml-IN": {
+          "precision": 1.0,
+          "recall": 0.9230769230769231,
+          "f1-score": 0.96,
+          "support": 13.0
+        },
+        "mni-IN": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 17.0
+        },
+        "mr-IN": {
+          "precision": 1.0,
+          "recall": 0.8518518518518519,
+          "f1-score": 0.92,
+          "support": 27.0
+        },
+        "ne-IN": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 17.0
+        },
+        "od-IN": {
+          "precision": 1.0,
+          "recall": 0.9259259259259259,
+          "f1-score": 0.9615384615384616,
+          "support": 27.0
+        },
+        "pa-IN": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 21.0
+        },
+        "sa-IN": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 18.0
+        },
+        "sat-IN": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 18.0
+        },
+        "sd-IN": {
+          "precision": 0.9523809523809523,
+          "recall": 1.0,
+          "f1-score": 0.975609756097561,
+          "support": 20.0
+        },
+        "ta-IN": {
+          "precision": 0.9459459459459459,
+          "recall": 1.0,
+          "f1-score": 0.9722222222222222,
+          "support": 35.0
+        },
+        "te-IN": {
+          "precision": 1.0,
+          "recall": 0.9411764705882353,
+          "f1-score": 0.9696969696969697,
+          "support": 34.0
+        },
+        "ur-IN": {
+          "precision": 0.35,
+          "recall": 0.875,
+          "f1-score": 0.5,
+          "support": 8.0
+        },
+        "accuracy": 0.9368600682593856,
+        "macro avg": {
+          "precision": 0.9510314662488577,
+          "recall": 0.9561719226858407,
+          "f1-score": 0.947081511064695,
+          "support": 586.0
+        },
+        "weighted avg": {
+          "precision": 0.9550086898209764,
+          "recall": 0.9368600682593856,
+          "f1-score": 0.9410566553099441,
+          "support": 586.0
+        }
+      }
+    },
+    "romanized_codemix": {
+      "samples": 487,
+      "accuracy": 0.6960985626283368,
+      "report": {
+        "as-IN": {
+          "precision": 0.43478260869565216,
+          "recall": 0.2857142857142857,
+          "f1-score": 0.3448275862068966,
+          "support": 35.0
+        },
+        "bn-IN": {
+          "precision": 0.9166666666666666,
+          "recall": 0.8627450980392157,
+          "f1-score": 0.8888888888888888,
+          "support": 51.0
+        },
+        "en-IN": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 0.0
+        },
+        "gu-IN": {
+          "precision": 0.9473684210526315,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.782608695652174,
+          "support": 27.0
+        },
+        "hi-IN": {
+          "precision": 0.6,
+          "recall": 0.46153846153846156,
+          "f1-score": 0.5217391304347826,
+          "support": 91.0
+        },
+        "kn-IN": {
+          "precision": 0.9354838709677419,
+          "recall": 0.90625,
+          "f1-score": 0.9206349206349206,
+          "support": 32.0
+        },
+        "ml-IN": {
+          "precision": 0.85,
+          "recall": 0.7391304347826086,
+          "f1-score": 0.7906976744186046,
+          "support": 23.0
+        },
+        "mr-IN": {
+          "precision": 1.0,
+          "recall": 0.8043478260869565,
+          "f1-score": 0.891566265060241,
+          "support": 46.0
+        },
+        "od-IN": {
+          "precision": 0.9444444444444444,
+          "recall": 0.5666666666666667,
+          "f1-score": 0.7083333333333334,
+          "support": 30.0
+        },
+        "pa-IN": {
+          "precision": 0.9130434782608695,
+          "recall": 0.6774193548387096,
+          "f1-score": 0.7777777777777778,
+          "support": 31.0
+        },
+        "ta-IN": {
+          "precision": 0.9285714285714286,
+          "recall": 0.9512195121951219,
+          "f1-score": 0.9397590361445783,
+          "support": 41.0
+        },
+        "te-IN": {
+          "precision": 0.9607843137254902,
+          "recall": 0.8909090909090909,
+          "f1-score": 0.9245283018867925,
+          "support": 55.0
+        },
+        "ur-IN": {
+          "precision": 0.20253164556962025,
+          "recall": 0.64,
+          "f1-score": 0.3076923076923077,
+          "support": 25.0
+        },
+        "accuracy": 0.6960985626283368,
+        "macro avg": {
+          "precision": 0.7410520675349649,
+          "recall": 0.6502005690336757,
+          "f1-score": 0.6768503013947152,
+          "support": 487.0
+        },
+        "weighted avg": {
+          "precision": 0.8013292826873263,
+          "recall": 0.6960985626283368,
+          "f1-score": 0.7332689990894973,
+          "support": 487.0
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Synthetic dataset evaluation only",
+    "Validation performance is not real-world performance",
+    "No probability calibration performed",
+    "Romanized language confusion requires separate analysis"
+  ]
+}
