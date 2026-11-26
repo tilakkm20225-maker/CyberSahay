@@ -8,7 +8,11 @@
 
 **Understand suspicious messages. Identify fraud signals. Stay safer online.**
 
-<img src="docs/images/cybersahay-overview.png" alt="CyberSahay project overview infographic" width="100%">
+## 📸 Project Screenshots
+
+![CyberSahay Screenshot 1](docs/images/image.png)
+
+![CyberSahay Screenshot 2](docs/images/image%20%282%29.jpeg)
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688)
